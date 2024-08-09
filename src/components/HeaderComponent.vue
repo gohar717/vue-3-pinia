@@ -4,22 +4,38 @@ import SearchComponent from './SearchComponent.vue';
 
 import signInIcon from '../assets/images/sign-in.svg';
 import DropdownMenu from './DropdownMenu.vue';
+import { useRoute } from 'vue-router';
+import { ref, watch } from 'vue';
 
+const route = useRoute()
+
+const leaveLogoOnly = ref(route.path.includes('login'));
+
+watch(
+    () => route.path,
+    () => {
+        leaveLogoOnly.value = route.path.includes('login')
+    }
+)
 </script>
 
 <template>
-    <header class="header">
+    <header class="header" :class="{ hideField: leaveLogoOnly }">
         <div class="header__content container">
-            <img class="logo" src="../assets/images/logo.png" />
+            <RouterLink to="/">
+                <img class="logo" src="../assets/images/logo.png" />
+            </RouterLink>
 
             <div class="header__content__search">
                 <DropdownMenu />
                 <SearchComponent />
             </div>
 
-            <ButtonComponent class="signin" :icon="signInIcon">Sign In</ButtonComponent>
+            <RouterLink to="/login">
+                <ButtonComponent class="signin" :icon="signInIcon">Sign In</ButtonComponent>
+            </RouterLink>
         </div>
-        
+
     </header>
 </template>
 
@@ -79,7 +95,6 @@ import DropdownMenu from './DropdownMenu.vue';
                 display: none;
             }
         }
-
     }
 }
 
