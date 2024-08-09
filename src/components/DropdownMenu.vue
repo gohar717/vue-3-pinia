@@ -3,8 +3,9 @@ import { defineProps, withDefaults } from 'vue'
 import ButtonComponent from './ButtonComponent.vue';
 import menuIcon from '../assets/images/menu.svg';
 import { useCategoriesStore } from '@/stores/categories';
-import { BeakerIcon } from '@heroicons/vue/24/outline';
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
+import { BriefcaseIcon, ChevronRightIcon, CircleStackIcon, CodeBracketIcon, Cog6ToothIcon, CurrencyDollarIcon, EllipsisHorizontalCircleIcon, HomeModernIcon, RocketLaunchIcon, SparklesIcon } from '@heroicons/vue/24/outline';
+import { DevicePhoneMobileIcon, TruckIcon, BuildingOffice2Icon, HomeIcon, CubeIcon, ScissorsIcon, HeartIcon, UsersIcon } from '@heroicons/vue/24/outline';
+
 interface Props {
     isOpen: boolean;
 }
@@ -14,7 +15,26 @@ withDefaults(defineProps<Props>(), {
 })
 
 const store = useCategoriesStore();
-
+const iconsArr = [
+    BuildingOffice2Icon,
+    TruckIcon,
+    DevicePhoneMobileIcon,
+    CubeIcon,
+    HomeIcon,
+    ScissorsIcon,
+    HeartIcon,
+    UsersIcon,
+    RocketLaunchIcon,
+    SparklesIcon,
+    BriefcaseIcon,
+    HomeModernIcon,
+    CurrencyDollarIcon,
+    EllipsisHorizontalCircleIcon,
+    Cog6ToothIcon,
+    CodeBracketIcon,
+    BriefcaseIcon,
+    CircleStackIcon,
+]
 </script>
 
 <template>
@@ -23,12 +43,15 @@ const store = useCategoriesStore();
         <div class="dropdown-content container">
             <div class="categories">
                 <div class="categories__list">
-                    <div class="categories__list-item" v-for="category in store.categories" :key="category.id">
-                        <div>
-                            <BeakerIcon class="icon" />
-                            {{ category.title }}
+                    <div v-for="(category, i) in store.categories" :key="category.id">
+                        <div class="categories__list-item">
+                            <div>
+                                <component class="icon" :is="iconsArr[i]"></component>
+                                {{ category.title }}
+                            </div>
+                            <ChevronRightIcon class="icon" />
                         </div>
-                        <ChevronRightIcon class="icon" />
+                        <div v-if="category.break" class="break" />
                     </div>
                 </div>
                 <div class="categories__sub-categories">sub categories section</div>

@@ -13,3 +13,4 @@ app.mount('#app')
 
 // * Icons
 // https://www.svgrepo.com/  
+// https://heroicons.com/
