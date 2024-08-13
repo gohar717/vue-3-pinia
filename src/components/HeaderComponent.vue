@@ -1,38 +1,41 @@
 <script lang="ts" setup>
 import ButtonComponent from './ButtonComponent.vue';
-import SearchComponent from './SearchComponent.vue';
 
 import signInIcon from '../assets/images/sign-in.svg';
 import DropdownMenu from './DropdownMenu.vue';
 import { useRoute } from 'vue-router';
 import { ref, watch } from 'vue';
+import InputComponent from './InputComponent.vue';
 
 const route = useRoute()
 
 const leaveLogoOnly = ref(route.path.includes('login'));
+const isLoggedin = ref(false);
 
-watch(
-    () => route.path,
-    () => {
-        leaveLogoOnly.value = route.path.includes('login')
-    }
+watch(() => route.path, 
+() => {
+    isLoggedin.value = !JSON.parse(localStorage.getItem('user') || '{}')?.email
+    leaveLogoOnly.value = route.path.includes('login')
+    console.log(isLoggedin.value)
+}
 )
+
 </script>
 
 <template>
-    <header class="header" :class="{ hideField: leaveLogoOnly }">
+    <header class="header">
         <div class="header__content container">
             <RouterLink to="/">
                 <img class="logo" src="../assets/images/logo.png" />
             </RouterLink>
 
-            <div class="header__content__search">
+            <div v-if="!leaveLogoOnly" class="header__content__search">
                 <DropdownMenu />
-                <SearchComponent />
+                <InputComponent placeholder="Search" />
             </div>
 
-            <RouterLink to="/login">
-                <ButtonComponent class="signin" :icon="signInIcon">Sign In</ButtonComponent>
+            <RouterLink v-if="!leaveLogoOnly" to="/login">
+                <ButtonComponent class="signin" :icon="signInIcon">{{isLoggedin ? 'Sign In' : 'Sign out'}}</ButtonComponent>
             </RouterLink>
         </div>
 

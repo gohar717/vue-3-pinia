@@ -4,12 +4,14 @@ interface Props {
     icon?: string;
     iconStart?: boolean;
     type?: 'outline' | 'filled' | 'text';
+    fullWidth?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
     icon: '',
     iconStart: false,
-    type: 'filled'
+    type: 'filled',
+    fullWidth: false
 })
 
 </script>
@@ -17,7 +19,7 @@ withDefaults(defineProps<Props>(), {
 <template>
     <button
         class="button" 
-        :class="{ iconStart, [type]: true }"
+        :class="{ iconStart, fullWidth, [type]: true }"
     >
         <slot></slot>
         <img class="icon" v-if="icon" :src="icon" alt="icon" />
@@ -47,6 +49,11 @@ withDefaults(defineProps<Props>(), {
     @media screen and (max-width: 640px) {
         padding: 14px 16px;
         gap: 8px;
+    }
+
+    &.fullWidth {
+        width: 100%;
+        max-width: 100%;
     }
 
     &.outline {
