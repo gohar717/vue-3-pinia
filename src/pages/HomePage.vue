@@ -4,27 +4,108 @@ import CardComponent from '@/components/CardComponent.vue';
 const products = [
     {
         id: '1',
-        title: 'Canon 7d',
-        img: 'https://i1.adis.ws/i/canon/eos-r5_martin_bissig_lifestyle_05_c629aad3c2154f34b3d7d7ba5a509196?$70-30-header-4by3-dt-jpg$',
-        price: '299.9$',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
     },
     {
         id: '2',
-        title: 'Canon 7d',
-        img: 'https://i1.adis.ws/i/canon/eos-r5_martin_bissig_lifestyle_05_c629aad3c2154f34b3d7d7ba5a509196?$70-30-header-4by3-dt-jpg$',
-        price: '299.9$',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
     },
     {
         id: '3',
-        title: 'Canon 7d',
-        img: 'https://i1.adis.ws/i/canon/eos-r5_martin_bissig_lifestyle_05_c629aad3c2154f34b3d7d7ba5a509196?$70-30-header-4by3-dt-jpg$',
-        price: '299.9$',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
     },
     {
         id: '4',
-        title: 'Canon 7d',
-        img: 'https://i1.adis.ws/i/canon/eos-r5_martin_bissig_lifestyle_05_c629aad3c2154f34b3d7d7ba5a509196?$70-30-header-4by3-dt-jpg$',
-        price: '299.9$',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '4',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '4',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '4',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '4',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '4',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
+    },
+    {
+        id: '3',
+        title: 'Shampoo',
+        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
+        price: '89.9$',
+        discont: '19%'
     },
 ]
 
@@ -37,7 +118,8 @@ const products = [
                 :title="product.title"
                 :img="product.img"
                 :price="product.price"
-                button-tex="buy"
+                :discount="product.discont"
+                button-tex="Add to Cart"
             />
         </div>
     </div>
@@ -46,6 +128,8 @@ const products = [
 .home {
     width: 100%;
     height: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
 }
 .card-box {
     padding: 0 32px;

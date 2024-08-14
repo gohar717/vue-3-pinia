@@ -3,7 +3,7 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import InputComponent from '@/components/InputComponent.vue';
 
 
-import { useForm } from 'vee-validate';
+import { useField, useForm } from 'vee-validate';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 interface LoginForm {
@@ -22,7 +22,7 @@ function emailValidation(value: string) {
 
 const router = useRouter();
 
-const { handleSubmit, defineField, errors } = useForm<LoginForm>({
+const { handleSubmit } = useForm<LoginForm>({
     initialValues: {
         email: '',
         password: '',
@@ -32,8 +32,9 @@ const { handleSubmit, defineField, errors } = useForm<LoginForm>({
         password: required,
     },
 });
-const [email] = defineField('email');
-const [password] = defineField('password');
+
+const { value: email, errorMessage: emailError } = useField('email', [required, emailValidation], { validateOnValueUpdate: false });
+const { value: password, errorMessage: passwordError } = useField('password', [required], { validateOnValueUpdate: false });
 
 const onSubmit = handleSubmit(values => {
   localStorage.setItem('user', JSON.stringify(values));
@@ -49,8 +50,20 @@ onMounted(() => {
         <div class="signin__form">
             <form @submit="onSubmit">
                 <img class="logo" src="../assets/images/logo.png" />
-                <InputComponent v-model="email" name="email" type="text" placeholder="email" :error-message="errors.email" />
-                <InputComponent v-model="password" name="password" type="text" placeholder="password" :error-message="errors.password" />
+                <InputComponent 
+                    v-model="email"
+                    name="email"
+                    type="text"
+                    placeholder="email"
+                    :error-message="emailError"
+                />
+                <InputComponent 
+                    v-model="password"
+                    name="password"
+                    type="text"
+                    placeholder="password"
+                    :error-message="passwordError"
+                />
                 <ButtonComponent full-width>Sign In</ButtonComponent>
                 <small>sign up</small>
             </form>
