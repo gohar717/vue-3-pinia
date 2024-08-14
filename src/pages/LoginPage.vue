@@ -11,11 +11,16 @@ interface LoginForm {
     password: string;
 }
 
-const router = useRouter();
 
 function required(value: string) {
-  return value ? true : 'This field is required';
+    return value ? true : 'This field is required';
 }
+function emailValidation(value: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value) ? true : 'Please enter a valid email address';
+}
+
+const router = useRouter();
 
 const { handleSubmit, defineField, errors } = useForm<LoginForm>({
     initialValues: {
@@ -23,9 +28,9 @@ const { handleSubmit, defineField, errors } = useForm<LoginForm>({
         password: '',
     },
     validationSchema: {
-        email: required,
+        email: [required, emailValidation],
         password: required,
-    }
+    },
 });
 const [email] = defineField('email');
 const [password] = defineField('password');
@@ -71,6 +76,8 @@ onMounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
         form {
             width: 100%;
             display: flex;

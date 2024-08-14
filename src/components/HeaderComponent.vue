@@ -3,22 +3,27 @@ import ButtonComponent from './ButtonComponent.vue';
 
 import signInIcon from '../assets/images/sign-in.svg';
 import DropdownMenu from './DropdownMenu.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
 import InputComponent from './InputComponent.vue';
 
-const route = useRoute()
+const route = useRoute();
+const router = useRouter();
 
 const leaveLogoOnly = ref(route.path.includes('login'));
+const user = ref('')
 const isLoggedin = ref(false);
 
-watch(() => route.path, 
+watch(() => [route.path, user.value], 
 () => {
-    isLoggedin.value = !JSON.parse(localStorage.getItem('user') || '{}')?.email
+    user.value = JSON.parse(localStorage.getItem('user') || '{}')?.email
+    isLoggedin.value = !!user.value;
     leaveLogoOnly.value = route.path.includes('login')
-    console.log(isLoggedin.value)
+})
+
+const navigateToLogin = () => {
+    router.push('/login')
 }
-)
 
 </script>
 
@@ -34,9 +39,17 @@ watch(() => route.path,
                 <InputComponent placeholder="Search" />
             </div>
 
-            <RouterLink v-if="!leaveLogoOnly" to="/login">
-                <ButtonComponent class="signin" :icon="signInIcon">{{isLoggedin ? 'Sign In' : 'Sign out'}}</ButtonComponent>
-            </RouterLink>
+            <div class="user-section">
+                <p v-if="isLoggedin && !leaveLogoOnly">{{ user }}</p>
+                <ButtonComponent
+                     v-if="!leaveLogoOnly"
+                     @click="navigateToLogin"
+                     class="signin"
+                     :icon="signInIcon"
+                >
+                    {{isLoggedin ? 'Sign Out' : 'Sign In'}}
+                </ButtonComponent>
+            </div>
         </div>
 
     </header>
@@ -49,7 +62,7 @@ watch(() => route.path,
     display: flex;
     align-items: center;
     background-color: #f5eef8;
-    border-bottom: 2px solid #CCCCFF;
+    border-bottom: 1px solid #CCCCFF;
     position: fixed;
 
     &__content {
@@ -97,6 +110,11 @@ watch(() => route.path,
             @media (max-width: 640px) {
                 display: none;
             }
+        }
+        .user-section{
+            display: flex;
+            align-items: center;
+            gap: 18px;
         }
     }
 }
