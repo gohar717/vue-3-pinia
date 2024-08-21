@@ -12,9 +12,14 @@ body {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-
+    padding: 0 32px;
+    
     @media screen and (max-width: 1024px) {
+        padding: 0 20px;
         max-width: 100%;
+    }
+    @media screen and (max-width: 640px) {
+        padding: 0 10px;
     }
 }
 

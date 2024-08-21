@@ -1,124 +1,23 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue';
+import { usProductsStore } from '@/stores/products';
 
-const products = [
-    {
-        id: '1',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '2',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '4',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-    {
-        id: '3',
-        title: 'Shampoo',
-        img: 'https://lapink.com/cdn/shop/files/self-care-combo-paytm-la-pink-2.jpg?v=1721375421&width=416',
-        price: '89.9$',
-        discont: '19%'
-    },
-]
+const store = usProductsStore()
 
+const discountCalc = (e: number | null) => {
+
+    return e
+}
 </script>
 <template>
     <div class="home container">
         <div class="card-box">
             <CardComponent
-                v-for="product in products" :key="product.id"
+                v-for="product in store.products" :key="product.id"
                 :title="product.title"
                 :img="product.img"
                 :price="product.price"
-                :discount="product.discont"
+                :discount="discountCalc(product.discont)"
                 button-tex="Add to Cart"
             />
         </div>
@@ -127,7 +26,6 @@ const products = [
 <style scoped lang="scss">
 .home {
     width: 100%;
-    height: 100%;
     padding: 20px 0;
     box-sizing: border-box;
 }

@@ -1,32 +1,46 @@
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, computed } from 'vue'
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import ShopIcon from '@/assets/images/shopping-cart.svg';
 
 interface Props {
     title: string;
     img: string;
-    price: string;
+    price: number | null;
     buttonTex: string;
-    discount: string;
+    discount: number | null;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
     title: '',
     img: '',
-    price: '',
+    price: null,
     buttonTex: '',
-    discount: ''
+    discount: null
 })
 
+const numberWithCommas = (x: number | null) => {
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+const discountCalc = computed(() => {
+    if (props.price && props.discount) {
+        return numberWithCommas(Math.floor(props.price - (props.price / 100 * props.discount)))
+    } else if (props.price) {
+        return numberWithCommas(props.price)
+    }
+    return 0
+})
 </script>
 
 <template>
     <div class="card">
         <img class="card__image" :src="img" alt="card-image" />
-        <h2 class="card__header">{{title}} <small>{{ discount }}</small></h2>
-        <p class="card__price">{{price}}</p>
-        <ButtonComponent full-width :icon="ShopIcon">{{buttonTex}}</ButtonComponent>
+        <h2 class="card__header">{{title}} <small v-if="discount">{{ discount }}%</small></h2>
+        <div class="card__price">
+            <span>{{ discountCalc }}$ </span>
+            <small v-if="discount" class="old-price">{{ numberWithCommas(props.price) }}$</small>
+        </div>
+        <ButtonComponent full-width :icon="ShopIcon" icon-start>{{ buttonTex }}</ButtonComponent>
     </div>
 </template>
 
@@ -36,14 +50,14 @@ withDefaults(defineProps<Props>(), {
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 1rem;
+    border-radius: 9px;
     overflow: hidden;
     text-align: start;
     gap: 8px;
 
     &__image {
         width: 100%;
-        height: 100%;
+        height: 300px;
         object-fit: cover;
     }
     &__header {
@@ -61,6 +75,9 @@ withDefaults(defineProps<Props>(), {
     &__price {
         font-size: 18px;
         padding: 0 8px;
+        .old-price {
+            text-decoration: line-through;
+        }
     }
 }
 </style>
