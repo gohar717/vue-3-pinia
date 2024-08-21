@@ -4,10 +4,6 @@ import { useProductsStore } from '@/stores/products';
 
 const productsStore = useProductsStore();
 
-const discountCalc = (e: number | null) => {
-
-    return e
-}
 </script>
 <template>
     <div class="home container">
@@ -17,7 +13,7 @@ const discountCalc = (e: number | null) => {
                 :title="product.title"
                 :img="product.img"
                 :price="product.price"
-                :discount="discountCalc(product.discont)"
+                :discount="product.discont"
                 button-tex="Add to Cart"
             />
         </div>
