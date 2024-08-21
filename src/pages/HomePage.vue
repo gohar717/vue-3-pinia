@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue';
-import { usProductsStore } from '@/stores/products';
+import { useProductsStore } from '@/stores/products';
 
-const store = usProductsStore()
-
+const store = useProductsStore();
+console.log(store.productsFilter)
 const discountCalc = (e: number | null) => {
 
     return e
@@ -13,7 +13,7 @@ const discountCalc = (e: number | null) => {
     <div class="home container">
         <div class="card-box">
             <CardComponent
-                v-for="product in store.products" :key="product.id"
+                v-for="product in store.productsFilter" :key="product.id"
                 :title="product.title"
                 :img="product.img"
                 :price="product.price"
@@ -26,14 +26,16 @@ const discountCalc = (e: number | null) => {
 <style scoped lang="scss">
 .home {
     width: 100%;
-    padding: 20px 0;
     box-sizing: border-box;
 }
 .card-box {
-    padding: 0 32px;
+    padding: 20px;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr) );
     gap: 20px;
+    @media screen and (max-width: 640px) {
+        padding: 20px 10px;
+    }
 }
 </style>

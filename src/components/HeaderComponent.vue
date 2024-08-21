@@ -6,9 +6,12 @@ import DropdownMenu from './DropdownMenu.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
 import InputComponent from './InputComponent.vue';
+import { useProductsStore } from '@/stores/products';
 
 const route = useRoute();
 const router = useRouter();
+
+const productsStore = useProductsStore();
 
 const leaveLogoOnly = ref(route.path.includes('login'));
 const user = ref('')
@@ -36,7 +39,7 @@ const navigateToLogin = () => {
 
             <div v-if="!leaveLogoOnly" class="header__content__search">
                 <DropdownMenu />
-                <InputComponent placeholder="Search" />
+                <InputComponent placeholder="Search" v-model="productsStore.search"/>
             </div>
 
             <div class="user-section">
@@ -66,7 +69,8 @@ const navigateToLogin = () => {
     position: fixed;
 
     &__content {
-        padding: 8px 32px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         box-sizing: border-box;
         display: grid;
         grid-template-columns: auto 1fr auto;
@@ -75,12 +79,10 @@ const navigateToLogin = () => {
         gap: 18px;
 
         @media (max-width: 1024px) {
-            padding: 8px 32px;
             gap: 10px;
         }
 
         @media (max-width: 640px) {
-            padding: 8px 10px;
             grid-template-columns: auto 1fr max-content;
             gap: 0px;
         }

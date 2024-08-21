@@ -47,6 +47,7 @@ const discountCalc = computed(() => {
 <style scoped lang="scss">
 .card {
     width: 100%;
+    max-width: 350px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -54,6 +55,9 @@ const discountCalc = computed(() => {
     overflow: hidden;
     text-align: start;
     gap: 8px;
+    @media screen and (max-width: 640px) {
+        max-width: 100%;
+    }
 
     &__image {
         width: 100%;
@@ -75,6 +79,8 @@ const discountCalc = computed(() => {
     &__price {
         font-size: 18px;
         padding: 0 8px;
+        display: flex;
+        gap: 10px;
         .old-price {
             text-decoration: line-through;
         }
