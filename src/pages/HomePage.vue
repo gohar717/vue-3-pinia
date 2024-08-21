@@ -2,8 +2,8 @@
 import CardComponent from '@/components/CardComponent.vue';
 import { useProductsStore } from '@/stores/products';
 
-const store = useProductsStore();
-console.log(store.productsFilter)
+const productsStore = useProductsStore();
+
 const discountCalc = (e: number | null) => {
 
     return e
@@ -13,7 +13,7 @@ const discountCalc = (e: number | null) => {
     <div class="home container">
         <div class="card-box">
             <CardComponent
-                v-for="product in store.productsFilter" :key="product.id"
+                v-for="product in productsStore.productsFilter" :key="product.id"
                 :title="product.title"
                 :img="product.img"
                 :price="product.price"
