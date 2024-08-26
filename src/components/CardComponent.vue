@@ -34,7 +34,22 @@ const discountCalc = computed(() => {
 
 <template>
     <div class="card">
-        <img class="card__image" :src="img" alt="card-image" />
+        <v-carousel class="card__image" show-arrows="hover" hide-delimiters height="300px">
+            <v-carousel-item
+                :src="img"
+                cover
+            ></v-carousel-item>
+
+            <v-carousel-item
+                src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+                cover
+            ></v-carousel-item>
+
+            <v-carousel-item
+                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                cover
+            ></v-carousel-item>
+        </v-carousel>
         <h2 class="card__header">{{title}} <small v-if="discount">{{ discount }}%</small></h2>
         <div class="card__price">
             <span>{{ discountCalc }}$ </span>
@@ -60,9 +75,11 @@ const discountCalc = computed(() => {
     }
 
     &__image {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
+        img{
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
     }
     &__header {
         font-size: 20px;

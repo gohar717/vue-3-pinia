@@ -68,6 +68,7 @@ const navigateToLogin = () => {
     background-color: #f3e4f9;
     border-bottom: 1px solid #CCCCFF;
     position: fixed;
+    z-index: 9999;
 
     &__content {
         padding-top: 8px;

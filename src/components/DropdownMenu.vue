@@ -1,18 +1,9 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue'
 import ButtonComponent from './ButtonComponent.vue';
 import menuIcon from '../assets/images/menu.svg';
 import { useCategoriesStore } from '@/stores/categories';
 import { BriefcaseIcon, ChevronRightIcon, CircleStackIcon, CodeBracketIcon, Cog6ToothIcon, CurrencyDollarIcon, EllipsisHorizontalCircleIcon, HomeModernIcon, RocketLaunchIcon, SparklesIcon } from '@heroicons/vue/24/outline';
 import { DevicePhoneMobileIcon, TruckIcon, BuildingOffice2Icon, HomeIcon, CubeIcon, ScissorsIcon, HeartIcon, UsersIcon } from '@heroicons/vue/24/outline';
-
-interface Props {
-    isOpen: boolean;
-}
-
-withDefaults(defineProps<Props>(), {
-    isOpen: false
-})
 
 const store = useCategoriesStore();
 const iconsArr = [
@@ -127,7 +118,7 @@ const iconsArr = [
 }
 
 .dropdown:hover .dropbtn {
-    margin-top: 27px;
+    margin-top: 22px;
     border-radius: 9px 9px 0 0;
     background-color: #b091bb56;
 }
