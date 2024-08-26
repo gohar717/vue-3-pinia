@@ -2,6 +2,7 @@
 import ButtonComponent from './ButtonComponent.vue';
 
 import signInIcon from '../assets/images/sign-in.svg';
+import logoPng from '../assets/images/logo.png';
 import DropdownMenu from './DropdownMenu.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
@@ -34,7 +35,7 @@ const navigateToLogin = () => {
     <header class="header">
         <div class="header__content container">
             <RouterLink to="/">
-                <img class="logo" src="../assets/images/logo.png" />
+                <img class="logo" :src="logoPng" />
             </RouterLink>
 
             <div v-if="!leaveLogoOnly" class="header__content__search">
@@ -64,7 +65,7 @@ const navigateToLogin = () => {
     height: 80px;
     display: flex;
     align-items: center;
-    background-color: #f5eef8;
+    background-color: #f3e4f9;
     border-bottom: 1px solid #CCCCFF;
     position: fixed;
 

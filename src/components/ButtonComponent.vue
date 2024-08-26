@@ -17,13 +17,13 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <button
+    <v-button
         class="button" 
         :class="{ iconStart, fullWidth, [type]: true }"
     >
         <slot></slot>
         <img class="icon" v-if="icon" :src="icon" alt="icon" />
-    </button>
+    </v-button>
 </template>
 
 <style scoped lang="scss">

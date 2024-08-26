@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import InputComponent from '@/components/InputComponent.vue';
+import logoPng from '../assets/images/logo.png';
 
 
 import { useField, useForm } from 'vee-validate';
@@ -49,7 +50,7 @@ onMounted(() => {
     <div class="signin">
         <div class="signin__form">
             <form @submit="onSubmit">
-                <img class="logo" src="../assets/images/logo.png" />
+                <img class="logo" :src="logoPng" />
                 <InputComponent 
                     v-model="email"
                     name="email"

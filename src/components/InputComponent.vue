@@ -46,6 +46,7 @@ function handleInput(event: Event) {
     border-radius: 9px;
     transition: 300ms all ease;
     box-sizing: border-box;
+    background-color: whitesmoke;
 
     @media screen and (max-width: 1024px) {
         padding: 16px 20px;
